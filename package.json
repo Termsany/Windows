@@ -1,0 +1,14 @@
+{
+  "name": "windows-iso-builder-dashboard",
+  "version": "1.0.0",
+  "description": "Node.js web dashboard for building customized Windows ISO images",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "validate": "node scripts/validate-project.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

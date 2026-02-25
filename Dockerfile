@@ -1,7 +1,14 @@
-FROM mcr.microsoft.com/powershell:7.4-ubuntu-22.04
+FROM node:20-alpine
 
-WORKDIR /workspace
+WORKDIR /app
 
-COPY . /workspace
+COPY package.json ./
+COPY src ./src
+COPY public ./public
+COPY programs ./programs
+COPY templates ./templates
+COPY scripts ./scripts
 
-CMD ["pwsh", "-NoLogo", "-NoProfile", "-Command", "Write-Host 'Container ready. Run: pwsh ./scripts/Validate-Project.ps1'"]
+EXPOSE 3000
+
+CMD ["npm", "start"]

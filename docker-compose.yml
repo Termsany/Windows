@@ -1,10 +1,10 @@
 services:
-  validator:
+  dashboard:
     build:
       context: .
       dockerfile: Dockerfile
-    working_dir: /workspace
+    ports:
+      - "3000:3000"
     volumes:
-      - ./:/workspace
-    command: >
-      pwsh -NoLogo -NoProfile -File ./scripts/Validate-Project.ps1
+      - ./:/app
+    command: npm start
