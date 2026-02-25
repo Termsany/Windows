@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windows ISO Builder Dashboard</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card header-card">
+      <h1>Windows ISO Builder Dashboard</h1>
+      <p>Choose your Windows ISO, manually add programs, and start the custom build.</p>
+    </section>
+
+    <section class="card grid">
+      <label>
+        <span>Source ISO path</span>
+        <input id="sourceIso" placeholder="C:\\ISO\\Win11.iso" />
+      </label>
+
+      <label>
+        <span>Output ISO path</span>
+        <input id="outputIso" placeholder="C:\\ISO\\Win11_Custom.iso" />
+      </label>
+
+      <label>
+        <span>Working directory (optional)</span>
+        <input id="workingDirectory" placeholder="C:\\Temp\\iso-build" />
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>Add Program Manually</h2>
+      <div class="program-form">
+        <label>
+          <span>Key (example: brave)</span>
+          <input id="newProgramKey" placeholder="brave" />
+        </label>
+        <label>
+          <span>Display Name</span>
+          <input id="newProgramDisplayName" placeholder="Brave Browser" />
+        </label>
+        <label>
+          <span>Chocolatey package</span>
+          <input id="newProgramPackage" placeholder="brave" />
+        </label>
+      </div>
+      <div class="row between">
+        <small class="hint">Source is currently fixed to <code>choco</code>.</small>
+        <button id="addProgramBtn" type="button" class="secondary">Add Program</button>
+      </div>
+      <pre id="catalogActionLog" class="mini-log">No manual program changes yet.</pre>
+    </section>
+
+    <section class="card">
+      <div class="row between">
+        <h2>Programs</h2>
+        <div class="row">
+          <button id="selectAll" type="button">Select All</button>
+          <button id="clearAll" type="button" class="secondary">Clear</button>
+        </div>
+      </div>
+      <div id="programs" class="programs"></div>
+    </section>
+
+    <section class="card">
+      <div class="row between">
+        <button id="buildBtn" class="primary" type="button">Build Custom ISO</button>
+        <span id="statusBadge" class="badge idle">Idle</span>
+      </div>
+      <pre id="logs" class="logs">Waiting for build...</pre>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
