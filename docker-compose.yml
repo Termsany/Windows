@@ -1,0 +1,10 @@
+services:
+  validator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    command: >
+      pwsh -NoLogo -NoProfile -File ./scripts/Validate-Project.ps1
