@@ -10,7 +10,7 @@
   <main class="container">
     <section class="card header-card">
       <h1>Windows ISO Builder Dashboard</h1>
-      <p>Choose your Windows ISO, manually add programs, and start the custom build.</p>
+      <p>Choose your Windows ISO, select programs, and start the custom build.</p>
     </section>
 
     <section class="card grid">
@@ -28,29 +28,6 @@
         <span>Working directory (optional)</span>
         <input id="workingDirectory" placeholder="C:\\Temp\\iso-build" />
       </label>
-    </section>
-
-    <section class="card">
-      <h2>Add Program Manually</h2>
-      <div class="program-form">
-        <label>
-          <span>Key (example: brave)</span>
-          <input id="newProgramKey" placeholder="brave" />
-        </label>
-        <label>
-          <span>Display Name</span>
-          <input id="newProgramDisplayName" placeholder="Brave Browser" />
-        </label>
-        <label>
-          <span>Chocolatey package</span>
-          <input id="newProgramPackage" placeholder="brave" />
-        </label>
-      </div>
-      <div class="row between">
-        <small class="hint">Source is currently fixed to <code>choco</code>.</small>
-        <button id="addProgramBtn" type="button" class="secondary">Add Program</button>
-      </div>
-      <pre id="catalogActionLog" class="mini-log">No manual program changes yet.</pre>
     </section>
 
     <section class="card">

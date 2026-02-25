@@ -7,11 +7,6 @@ const badgeEl = document.getElementById('statusBadge');
 const buildBtnEl = document.getElementById('buildBtn');
 const selectAllEl = document.getElementById('selectAll');
 const clearAllEl = document.getElementById('clearAll');
-const addProgramBtnEl = document.getElementById('addProgramBtn');
-const catalogActionLogEl = document.getElementById('catalogActionLog');
-const newProgramKeyEl = document.getElementById('newProgramKey');
-const newProgramDisplayNameEl = document.getElementById('newProgramDisplayName');
-const newProgramPackageEl = document.getElementById('newProgramPackage');
 
 let currentJobId = null;
 let pollTimer = null;
@@ -48,42 +43,6 @@ async function loadCatalog() {
 
   const data = await response.json();
   renderPrograms(data);
-}
-
-async function addProgram() {
-  const key = newProgramKeyEl.value.trim();
-  const displayName = newProgramDisplayNameEl.value.trim();
-  const packageName = newProgramPackageEl.value.trim();
-
-  if (!key || !displayName || !packageName) {
-    catalogActionLogEl.textContent = 'Please fill key, display name, and package.';
-    return;
-  }
-
-  addProgramBtnEl.disabled = true;
-  try {
-    const response = await fetch('/api/catalog', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key, displayName, package: packageName, source: 'choco' })
-    });
-
-    const result = await response.json();
-    if (!response.ok) {
-      catalogActionLogEl.textContent = `Failed to add program: ${result.error || 'Unknown error'}`;
-      return;
-    }
-
-    catalogActionLogEl.textContent = `Program added: ${result.key} (${result.program.package})`;
-    newProgramKeyEl.value = '';
-    newProgramDisplayNameEl.value = '';
-    newProgramPackageEl.value = '';
-    await loadCatalog();
-  } catch (error) {
-    catalogActionLogEl.textContent = `Failed to add program: ${error.message}`;
-  } finally {
-    addProgramBtnEl.disabled = false;
-  }
 }
 
 async function pollJob() {
@@ -149,10 +108,6 @@ buildBtnEl.addEventListener('click', () => startBuild().catch(err => {
   logsEl.textContent = err.message;
   setBadge('failed');
   buildBtnEl.disabled = false;
-}));
-
-addProgramBtnEl.addEventListener('click', () => addProgram().catch(err => {
-  catalogActionLogEl.textContent = err.message;
 }));
 
 selectAllEl.addEventListener('click', () => {

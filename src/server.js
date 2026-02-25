@@ -81,14 +81,6 @@ function readCatalog() {
   return JSON.parse(text);
 }
 
-function writeCatalog(catalog) {
-  fs.writeFileSync(CATALOG_PATH, `${JSON.stringify(catalog, null, 2)}\n`, 'utf8');
-}
-
-function sanitizeKey(rawKey) {
-  return String(rawKey || '').trim().toLowerCase().replace(/[^a-z0-9_-]/g, '');
-}
-
 function startBuildJob({ sourceIso, outputIso, workingDirectory, programs }) {
   const id = randomUUID();
   const job = {
@@ -155,40 +147,6 @@ const server = http.createServer(async (req, res) => {
   try {
     if (req.method === 'GET' && req.url === '/api/catalog') {
       sendJson(res, 200, readCatalog());
-      return;
-    }
-
-    if (req.method === 'POST' && req.url === '/api/catalog') {
-      const body = await parseBody(req);
-      const key = sanitizeKey(body.key);
-      const displayName = String(body.displayName || '').trim();
-      const source = String(body.source || 'choco').trim().toLowerCase();
-      const packageName = String(body.package || '').trim();
-
-      if (!key || !displayName || !packageName) {
-        sendJson(res, 400, { error: 'key, displayName, and package are required.' });
-        return;
-      }
-
-      if (source !== 'choco') {
-        sendJson(res, 400, { error: 'Only source "choco" is supported right now.' });
-        return;
-      }
-
-      const catalog = readCatalog();
-      if (Object.prototype.hasOwnProperty.call(catalog, key)) {
-        sendJson(res, 409, { error: `Program key already exists: ${key}` });
-        return;
-      }
-
-      catalog[key] = {
-        displayName,
-        source,
-        package: packageName
-      };
-      writeCatalog(catalog);
-
-      sendJson(res, 201, { key, program: catalog[key] });
       return;
     }
 
