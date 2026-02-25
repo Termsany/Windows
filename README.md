@@ -10,6 +10,7 @@ This project creates a new Windows ISO that installs selected programs automatic
 - Stores your selected app list (`selected-programs.json`).
 - Uses `SetupComplete.cmd` to run a PowerShell installer on first boot.
 - Rebuilds a bootable ISO using `oscdimg.exe`.
+- Includes a dashboard GUI so you can select programs visually.
 
 ## Requirements
 
@@ -25,9 +26,9 @@ Edit available apps in:
 
 - `programs/catalog.json`
 
-Each key is what you pass to `-Programs`.
+Each key is what you pass to `-Programs` (or select in the GUI).
 
-## Build command
+## Option 1: Build via command line
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\Build-CustomWindowsIso.ps1 \
@@ -37,6 +38,22 @@ powershell -ExecutionPolicy Bypass -File .\scripts\Build-CustomWindowsIso.ps1 \
 ```
 
 If `-Programs` is omitted, the script prints available keys and exits.
+
+## Option 2: Build via dashboard GUI
+
+Launch:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\Start-IsoBuilderDashboard.ps1
+```
+
+In the dashboard:
+
+1. Pick source ISO.
+2. Pick output ISO location.
+3. (Optional) Pick a working directory.
+4. Check desired programs.
+5. Click **Build Custom ISO**.
 
 ## How program installation runs
 
