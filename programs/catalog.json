@@ -1,0 +1,37 @@
+{
+  "googlechrome": {
+    "displayName": "Google Chrome",
+    "source": "choco",
+    "package": "googlechrome"
+  },
+  "firefox": {
+    "displayName": "Mozilla Firefox",
+    "source": "choco",
+    "package": "firefox"
+  },
+  "7zip": {
+    "displayName": "7-Zip",
+    "source": "choco",
+    "package": "7zip"
+  },
+  "vlc": {
+    "displayName": "VLC Media Player",
+    "source": "choco",
+    "package": "vlc"
+  },
+  "notepadplusplus": {
+    "displayName": "Notepad++",
+    "source": "choco",
+    "package": "notepadplusplus"
+  },
+  "git": {
+    "displayName": "Git",
+    "source": "choco",
+    "package": "git"
+  },
+  "vscode": {
+    "displayName": "Visual Studio Code",
+    "source": "choco",
+    "package": "vscode"
+  }
+}
